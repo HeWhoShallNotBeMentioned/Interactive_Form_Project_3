@@ -38,3 +38,61 @@ $('#title').change(function(e) {
      $('#color').children().show();
    }
  });
+
+//double checks the activites to make sure the user does not schedule conflicts and gives a running total.
+//convert text to lower case
+
+var mainConfPrice = 200;
+var workshopPrice = 100;
+var countWorkshop = 0;
+
+
+var totalCost = (mainConfPrice * "yes/no") + (workshopPrice * countWorkshop);
+
+$('.activities [type="checkbox"]').on('click', function(e) {
+  console.log("inside activites function");
+  console.log(e);
+  var textArray = [];
+
+   //remove all disabled on checkboxes
+   clearDisabled();
+
+  $("input:checked").each(function(index){
+    console.log( index + ": " + $( this ).parent().text());
+    textArray.push($(this).parent().text());
+  });
+  console.log("textArray: ", textArray);
+  determineDisabled(textArray);
+});
+
+function clearDisabled () {
+  $('.activities [type="checkbox"]').each(function(){
+    $(this).removeAttr("disabled");
+  });
+}
+
+function determineDisabled (textArray) {
+  var dayOfWeek ="";
+  var time = "";
+  var matchArray = [];
+  console.log("inside determineDisabled");
+jQuery.each(textArray, function(i){
+  console.log("inside textArray push method");
+  console.log(textArray[i]);
+  var textString = textArray[i];
+  console.log(textString);
+  dayOfWeek = textString.match("(- T|- W)");
+  console.log(dayOfWeek);
+  matchArray.push(dayOfWeek);
+  console.log(matchArray);
+  //split the text into and array and look for the text at the specific index
+});
+  //find day of week (first letter is good enough)
+  //find time slot (first letter is good enough)
+
+  for (var i=0;i<textArray[0].length;i++) {
+      if (textArray[0][i] == textArray[1][i]) {
+          //This will only run when the first element's data-tes attribute's value is equal to the second element's. In this case, that'll be for the third value - at i==2.
+      }
+  }
+}
