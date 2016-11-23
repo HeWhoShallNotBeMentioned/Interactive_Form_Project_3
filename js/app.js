@@ -39,15 +39,6 @@ $('#title').change(function(e) {
    }
  });
 
-//double checks the activites to make sure the user does not schedule conflicts and gives a running total.
-//convert text to lower case
-
-var mainConfPrice = 200;
-var workshopPrice = 100;
-var countWorkshop = 0;
-
-
-var totalCost = (mainConfPrice * "yes/no") + (workshopPrice * countWorkshop);
 
 $('.activities [type="checkbox"]').on('click', function(e) {
   console.log("inside activites function");
@@ -73,26 +64,72 @@ function clearDisabled () {
 
 function determineDisabled (textArray) {
   var dayOfWeek ="";
-  var time = "";
+  var days = ["Tuesday", "Wednesday"];
+  var timeOfDay = "";
   var matchArray = [];
   console.log("inside determineDisabled");
-jQuery.each(textArray, function(i){
+
+
+  jQuery.each(textArray, function(i){
   console.log("inside textArray push method");
   console.log(textArray[i]);
   var textString = textArray[i];
   console.log(textString);
-  dayOfWeek = textString.match("(- T|- W)");
+  console.log(jQuery.type(textString));
+  var textSplit = textString.split(" ");
+  console.log(textSplit[5]);
+
+  for ( var d = 0; d < textSplit.length; d++ ) {
+   if (textSplit[d] == "Tuesday") {
+     dayOfWeek = "Tuesday";
+   }
+   if (textSplit[d] == "Wednesday") {
+     dayOfWeek = "Wednesday";
+   }
+   console.log(dayOfWeek);
+
+
+  if (textSplit[d] == "9am-12pm,") {
+    timeOfDay = "morning";
+  }
+  if (textSplit[d] == "1pm-4pm,") {
+    timeOfDay = "afternoon";
+  }
   console.log(dayOfWeek);
+ }
+
+  console.log(dayOfWeek);
+  console.log(timeOfDay);
   matchArray.push(dayOfWeek);
+  matchArray.push(timeOfDay);
   console.log(matchArray);
-  //split the text into and array and look for the text at the specific index
+
+  costCompute(matchArray);
+
 });
+}
+
+function costCompute (matchArray) {
+  var baseNumber = matchArray.length;
+  console.log("baseNumber: ", baseNumber);
+  var main = 0;
+  for ( var f = 0; f < matchArray.length; f++ ) {
+   if (matchArray[f] === "") {
+     main = 1;
+   }
+  }
+  var cost = ((baseNumber / 2) + main) * 100;
+  console.log(cost);
+  $('#cost').remove();
+  $('.activities').append("<div id='cost'>Total: $" + cost + "</div>");
+}
+
   //find day of week (first letter is good enough)
   //find time slot (first letter is good enough)
 
-  for (var i=0;i<textArray[0].length;i++) {
-      if (textArray[0][i] == textArray[1][i]) {
-          //This will only run when the first element's data-tes attribute's value is equal to the second element's. In this case, that'll be for the third value - at i==2.
-      }
-  }
-}
+//   for (var i=0;i<textArray[0].length;i++) {
+//       if (textArray[0][i] == textArray[1][i]) {
+//           //This will only run when the first element's data-tes attribute's value is equal to the second element's. In this case, that'll be for the third value - at i==2.
+//       }
+//   }
+// }
