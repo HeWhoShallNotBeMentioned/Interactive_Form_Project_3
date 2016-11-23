@@ -41,18 +41,20 @@ $('#title').change(function(e) {
 
 
 $('.activities [type="checkbox"]').on('click', function(e) {
-  console.log("inside activites function");
-  console.log(e);
+  //console.log("inside activites function");
+  //console.log(e);
   var textArray = [];
 
    //remove all disabled on checkboxes
    clearDisabled();
 
   $("input:checked").each(function(index){
-    console.log( index + ": " + $( this ).parent().text());
+    //console.log( index + ": " + $( this ).parent().text());
     textArray.push($(this).parent().text());
+    //console.log($(this).parent().name);
+    //console.log(textArray);
   });
-  console.log("textArray: ", textArray);
+  //console.log("textArray: ", textArray);
   determineDisabled(textArray);
 });
 
@@ -67,17 +69,16 @@ function determineDisabled (textArray) {
   var days = ["Tuesday", "Wednesday"];
   var timeOfDay = "";
   var matchArray = [];
-  console.log("inside determineDisabled");
-
+  //console.log("inside determineDisabled");
 
   jQuery.each(textArray, function(i){
-  console.log("inside textArray push method");
-  console.log(textArray[i]);
+  //console.log("inside textArray push method");
+  //console.log(textArray[i]);
   var textString = textArray[i];
-  console.log(textString);
-  console.log(jQuery.type(textString));
+  //console.log(textString);
+  //console.log(jQuery.type(textString));
   var textSplit = textString.split(" ");
-  console.log(textSplit[5]);
+  //console.log(textSplit[1]);
 
   for ( var d = 0; d < textSplit.length; d++ ) {
    if (textSplit[d] == "Tuesday") {
@@ -86,7 +87,7 @@ function determineDisabled (textArray) {
    if (textSplit[d] == "Wednesday") {
      dayOfWeek = "Wednesday";
    }
-   console.log(dayOfWeek);
+   //console.log(dayOfWeek);
 
 
   if (textSplit[d] == "9am-12pm,") {
@@ -95,33 +96,50 @@ function determineDisabled (textArray) {
   if (textSplit[d] == "1pm-4pm,") {
     timeOfDay = "afternoon";
   }
-  console.log(dayOfWeek);
+  //console.log(dayOfWeek);
  }
 
-  console.log(dayOfWeek);
-  console.log(timeOfDay);
+  //console.log(dayOfWeek);
+  //onsole.log(timeOfDay);
   matchArray.push(dayOfWeek);
   matchArray.push(timeOfDay);
+  matchArray.push(textSplit[1]);
   console.log(matchArray);
-
   costCompute(matchArray);
+  });
 
-});
+  $('.activities [type="checkbox"]').each( function () {
+    var alltext = "";
+        allText = $(this).parent().text();
+    var allTextSplit = allText.split(" ");
+    console.log(allTextSplit);
+    for (var m=0; m < matchArray.length; m++) {
+      for ( var z = 0; z < allTextSplit.length; z++ ) {
+        //if time and day but not the 'name' equal, set a disable attribute
+        if (allTextSplit[1][z] === matchArray[m][1] ){
+          //console.log(allTextSplit[1][z]);
+          //  console.log(matchArray[m][1]);
+          $(this).prop("disabled");
+        }
+      }
+    }
+  });
+
 }
 
 function costCompute (matchArray) {
   var baseNumber = matchArray.length;
-  console.log("baseNumber: ", baseNumber);
+  //console.log("baseNumber: ", baseNumber);
   var main = 0;
   for ( var f = 0; f < matchArray.length; f++ ) {
    if (matchArray[f] === "") {
      main = 1;
    }
   }
-  var cost = ((baseNumber / 2) + main) * 100;
-  console.log(cost);
+  var cost = ((baseNumber / 3) + main) * 100;
+  //console.log(cost);
   $('#cost').remove();
-  $('.activities').append("<div id='cost'>Total: $" + cost + "</div>");
+  $('.activities').append("<p id='cost'>Total: $" + cost + "</p>");
 }
 
   //find day of week (first letter is good enough)
