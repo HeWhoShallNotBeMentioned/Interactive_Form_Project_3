@@ -56,12 +56,14 @@ $('.activities [type="checkbox"]').on('click', function(e) {
   });
   //console.log("textArray: ", textArray);
   determineDisabled(textArray);
+
 });
 
 function clearDisabled () {
   $('.activities [type="checkbox"]').each(function(){
     $(this).removeAttr("disabled");
   });
+    $('#cost').remove();
 }
 
 function determineDisabled (textArray) {
@@ -70,6 +72,7 @@ function determineDisabled (textArray) {
   var timeOfDay = "";
   var matchArray = [];
   //console.log("inside determineDisabled");
+
 
   jQuery.each(textArray, function(i){
   //console.log("inside textArray push method");
@@ -109,20 +112,44 @@ function determineDisabled (textArray) {
   });
 
   $('.activities [type="checkbox"]').each( function () {
+    var thissy = $(this);
+    var dayOfWeek2 = "";
     var alltext = "";
         allText = $(this).parent().text();
     var allTextSplit = allText.split(" ");
-    console.log(allTextSplit);
-    for (var m=0; m < matchArray.length; m++) {
-      for ( var z = 0; z < allTextSplit.length; z++ ) {
-        //if time and day but not the 'name' equal, set a disable attribute
-        if (allTextSplit[1][z] === matchArray[m][1] ){
-          //console.log(allTextSplit[1][z]);
-          //  console.log(matchArray[m][1]);
-          $(this).prop("disabled");
-        }
+    //console.log("all text split ", allTextSplit);
+    for (var m=0; m < allTextSplit.length; m++) {
+      //console.log(allTextSplit[5]);
+      if (allTextSplit[m] == "Tuesday") {
+         dayOfWeek2 = "Tuesday";
+      }
+      if (allTextSplit[m] == "Wednesday") {
+        dayOfWeek2 = "Wednesday";
+      }
+      if (allTextSplit[m] == "9am-12pm,") {
+        timeOfDay = "morning";
+      }
+      if (allTextSplit[m] == "1pm-4pm,") {
+        timeOfDay = "afternoon";
       }
     }
+      for ( var z = 0; z < matchArray.length; z+=3 ) {
+          console.log("dayofweek2 ===" , dayOfWeek2);
+          console.log("matchArray[z] " , matchArray[z]);
+          console.log("allTextSplit[1]   !==", allTextSplit[1]);
+          console.log("matchArray[z+2]  ",matchArray[z+2]);
+          console.log("time of day:   ===", timeOfDay);
+          console.log("matchArray[z+1]  ",matchArray[z+1]);
+
+
+        if  ((timeOfDay === matchArray[z+1]) && (dayOfWeek2 === matchArray[z])) {
+          if ( allTextSplit[1]  !== matchArray[z+2]) {
+          console.log("thissy in the hizzy:   *******************   ",thissy);
+               (thissy).attr("disabled", true);
+          }
+        }
+      }
+
   });
 
 }
@@ -141,13 +168,3 @@ function costCompute (matchArray) {
   $('#cost').remove();
   $('.activities').append("<p id='cost'>Total: $" + cost + "</p>");
 }
-
-  //find day of week (first letter is good enough)
-  //find time slot (first letter is good enough)
-
-//   for (var i=0;i<textArray[0].length;i++) {
-//       if (textArray[0][i] == textArray[1][i]) {
-//           //This will only run when the first element's data-tes attribute's value is equal to the second element's. In this case, that'll be for the third value - at i==2.
-//       }
-//   }
-// }
