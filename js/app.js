@@ -7,10 +7,10 @@ $('#other-title').hide();
 
 //hides and shows the other title textbox depending upon the select box value
 $('#title').change(function(e) {
-    console.log("inside other text field function");
-    console.log(e);
+    //console.log("inside other text field function");
+    //console.log(e);
     if ($(this).val() == "other") {
-      console.log("inside if show other title function");
+      //console.log("inside if show other title function");
       $('#other-title').show();
 //code for creating the text box dynamically. Removed as box needs to be available without JavaScript
 //      var optionContainer = $("<div></div>");
@@ -19,19 +19,19 @@ $('#title').change(function(e) {
 //       $(optionContainer).appendTo('fieldset')[0];
    } else {
      $('#other-title').hide();
-     console.log("inside if hide other title function");
+     //console.log("inside if hide other title function");
    }
  });
 
 //tshirt color options function
  $('#design').change(function(e){
-   console.log("inside the tshirt color options function");
+   //console.log("inside the tshirt color options function");
    if ($(this).val() == "js puns") {
-      console.log('inside js puns');
+      //onsole.log('inside js puns');
       $('#color').children().hide();
       $('#color').children().slice(0,3).show();
    } else if ($(this).val() == "heart js"){
-     console.log('inside heart js');
+     //console.log('inside heart js');
      $('#color').children().hide();
      $('#color').children().slice(-3).show();
    } else {
@@ -107,7 +107,7 @@ function determineDisabled (textArray) {
   matchArray.push(dayOfWeek);
   matchArray.push(timeOfDay);
   matchArray.push(textSplit[1]);
-  console.log(matchArray);
+  //console.log(matchArray);
   costCompute(matchArray);
   });
 
@@ -134,17 +134,17 @@ function determineDisabled (textArray) {
       }
     }
       for ( var z = 0; z < matchArray.length; z+=3 ) {
-          console.log("dayofweek2 ===" , dayOfWeek2);
-          console.log("matchArray[z] " , matchArray[z]);
-          console.log("allTextSplit[1]   !==", allTextSplit[1]);
-          console.log("matchArray[z+2]  ",matchArray[z+2]);
-          console.log("time of day:   ===", timeOfDay);
-          console.log("matchArray[z+1]  ",matchArray[z+1]);
+          // console.log("dayofweek2 ===" , dayOfWeek2);
+          // console.log("matchArray[z] " , matchArray[z]);
+          // console.log("allTextSplit[1]   !==", allTextSplit[1]);
+          // console.log("matchArray[z+2]  ",matchArray[z+2]);
+          // console.log("time of day:   ===", timeOfDay);
+          // console.log("matchArray[z+1]  ",matchArray[z+1]);
 
 
         if  ((timeOfDay === matchArray[z+1]) && (dayOfWeek2 === matchArray[z])) {
           if ( allTextSplit[1]  !== matchArray[z+2]) {
-          console.log("thissy in the hizzy:   *******************   ",thissy);
+          //console.log("thissy in the hizzy:   *******************   ",thissy);
                (thissy).attr("disabled", true);
           }
         }
