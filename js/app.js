@@ -12,11 +12,6 @@ $('#title').change(function(e) {
     if ($(this).val() == "other") {
       //console.log("inside if show other title function");
       $('#other-title').show();
-//code for creating the text box dynamically. Removed as box needs to be available without JavaScript
-//      var optionContainer = $("<div></div>");
-//      var optionText = $("<input type='text' value=''/>").attr("id", "other-title").attr("placeholder","Your Job Role");
-//       $(optionContainer).append(optionText);
-//       $(optionContainer).appendTo('fieldset')[0];
    } else {
      $('#other-title').hide();
      //console.log("inside if hide other title function");
@@ -177,3 +172,23 @@ $(function() {
      $('#paypal').hide();
      $('#coinbase').hide();
 });
+
+//shows the payment method chosed and hides the other 2
+$('#payment').change(function(e) {
+
+    if ($(this).val() == "credit card") {
+
+      $('#paypal').hide();
+      $('#coinbase').hide();
+      $('#credit-card').show();
+
+   } else if ($(this).val() == "paypal") {
+     $('#credit-card').hide();
+     $('#coinbase').hide();
+     $('#paypal').show();
+   } else if ($(this).val() == "bitcoin") {
+     $('#credit-card').hide();
+     $('#paypal').hide();
+     $('#coinbase').show();
+   }
+ });
