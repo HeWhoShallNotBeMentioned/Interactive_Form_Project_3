@@ -168,3 +168,12 @@ function costCompute (matchArray) {
   $('#cost').remove();
   $('.activities').append("<p id='cost'>Total: $" + cost + "</p>");
 }
+
+//sets the credit card as default payment option and hides paypl & coinbase
+$(function() {
+    //var paymentFieldSet = $('body').find('fieldset')[3];
+    var payment="credit card";
+     $('#payment').val(payment);
+     $('#paypal').hide();
+     $('#coinbase').hide();
+});
