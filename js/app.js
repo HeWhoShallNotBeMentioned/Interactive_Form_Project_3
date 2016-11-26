@@ -196,9 +196,33 @@ $('#payment').change(function(e) {
 
 
  function validateForm(e) {
-
+   //prevents the default behavior or submitting the form
    e.preventDefault();
-   console.log("inside validate form function");
+   var nameField = e.target.name.value;
+   var errorArray = [];
+
+   $("#name-error").hide();
+
+   console.log(e.target.name.value);
+   if (nameField.length < 1) {
+   console.log(e.target.name.value);
+      errorArray.push(nameField);
+       $("label[for='name']").append('<div id="name-error">The name field is required</div>');
+    }
+   //checking if name field is blank
+
+   //checking if email is formatted correctly
+
+   //at least one checkbox for sessions must be selected
+
+   //If credit card - check credit length, zip code length, and cvv length
+
+   if (errorArray.length > 0) {
+      console.log("errorArray is greater than 0");
+
+      //give the 6 fields a new class for the red border?
+   }
+
  }
 
 theForm = document.getElementById('signupForm');
