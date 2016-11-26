@@ -192,3 +192,14 @@ $('#payment').change(function(e) {
      $('#coinbase').show();
    }
  });
+
+
+
+ function validateForm(e) {
+
+   e.preventDefault();
+   console.log("inside validate form function");
+ }
+
+theForm = document.getElementById('signupForm');
+theForm.addEventListener('submit', validateForm, false);
