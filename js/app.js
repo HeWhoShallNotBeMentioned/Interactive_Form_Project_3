@@ -34,7 +34,7 @@ $('#title').change(function(e) {
    }
  });
 
-
+//grabs th text of each checkbox as it is clicked or drops when it is unclicked.
 $('.activities [type="checkbox"]').on('click', function(e) {
   //console.log("inside activites function");
   //console.log(e);
@@ -61,6 +61,7 @@ function clearDisabled () {
     $('#cost').remove();
 }
 
+//hides conflicting times for selected sessions
 function determineDisabled (textArray) {
   var dayOfWeek ="";
   var days = ["Tuesday", "Wednesday"];
@@ -144,11 +145,10 @@ function determineDisabled (textArray) {
           }
         }
       }
-
   });
 
 }
-
+//calculates and displays the total cost. does so live with each click.
 function costCompute (matchArray) {
   var baseNumber = matchArray.length;
   //console.log("baseNumber: ", baseNumber);
@@ -236,28 +236,25 @@ $('#payment').change(function(e) {
 
    //If credit card - check credit length, zip code length, and cvv length
     if (creditCardPattern.test(userCreditCard)){
-      console.log(userCreditCard);
+      //console.log(userCreditCard);
     } else {
       $("#cc_num-error").remove();
       $("label[for='cc_num']").append('<div id="cc_num-error" class="error">The credit card should be between 13 & 16 digits.</div>');
     }
 
     if (zipCodePattern.test(userZipCode)) {
-      console.log(userZipCode);
+      //console.log(userZipCode);
     } else {
       $("#zip-error").remove();
       $("label[for='zip']").append('<div id="zip-error" class="error">The zip code should be 5 digits.</div>');
     }
 
     if (cvvPattern.test(userCVV)) {
-      console.log(userCVV);
+      //console.log(userCVV);
     } else {
       $("#cvv-error").remove();
       $("label[for='cvv']").append('<div id="cvv-error" class="error">The cvv code should be 3 digits.</div>');
     }
-
-
-
  }
 
 //checks email on each keyup to test if it is valid
