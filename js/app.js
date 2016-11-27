@@ -201,7 +201,7 @@ $('#payment').change(function(e) {
 
  function validateForm(e) {
    //prevents the default behavior or submitting the form
-   e.preventDefault();
+
    var nameField = e.target.name.value;
    var emailField = e.target.mail.value;
    var emailPattern = new RegExp("[a-zA-Z0-9._]+@[a-zA-Z0-9]+[.][a-zA-Z]{2,}");
@@ -222,7 +222,7 @@ $('#payment').change(function(e) {
 
   //checking if name field is blank
    if (nameField.length < 1) {
-
+      e.preventDefault();
       $("label[for='name']").append('<div id="name-error" class="error">The name field is required.</div>');
     }
 
@@ -233,7 +233,7 @@ $('#payment').change(function(e) {
        //console.log(emailField + " inside email if - not approved");
        $("#mail-error").remove();
        $("label[for='mail']").append('<div id="mail-error" class="error">The email format is incorrect.</div>');
-
+       e.preventDefault();
      }
 
    //at least one checkbox for sessions must be selected
@@ -241,9 +241,10 @@ $('#payment').change(function(e) {
     console.log("At least one checkbox was checked.");
     }
     else {
-   // none is checked
-   $("#activities-error").remove();
-   $("#activities").append('<div id="activities-error" class="error">At least one checkbox must be selected.</div>');
+      // none is checked
+      $("#activities-error").remove();
+      $("#activities").append('<div id="activities-error" class="error">At least one checkbox must be selected.</div>');
+      e.preventDefault();
     }
 
    //If credit card - check credit length, zip code length, and cvv length
@@ -252,6 +253,7 @@ $('#payment').change(function(e) {
     } else {
       $("#cc_num-error").remove();
       $("label[for='cc_num']").append('<div id="cc_num-error" class="error">The credit card should be between 13 & 16 digits.</div>');
+      e.preventDefault();
     }
 
     if (zipCodePattern.test(userZipCode)) {
@@ -259,6 +261,7 @@ $('#payment').change(function(e) {
     } else {
       $("#zip-error").remove();
       $("label[for='zip']").append('<div id="zip-error" class="error">The zip code should be 5 digits.</div>');
+      e.preventDefault();
     }
 
     if (cvvPattern.test(userCVV)) {
@@ -266,6 +269,7 @@ $('#payment').change(function(e) {
     } else {
       $("#cvv-error").remove();
       $("label[for='cvv']").append('<div id="cvv-error" class="error">The cvv code should be 3 digits.</div>');
+      e.preventDefault();
     }
  }
 
