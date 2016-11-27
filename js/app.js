@@ -29,10 +29,12 @@ $('#title').change(function(e) {
       //onsole.log('inside js puns');
       $('#color').children().hide();
       $('#color').children().slice(0,3).show();
+      $('#color').val("cornflowerblue");
    } else if ($(this).val() == "heart js"){
      //console.log('inside heart js');
      $('#color').children().hide();
      $('#color').children().slice(-3).show();
+     $('#color').val("tomato");
    } else {
      $('#color').children().show();
    }
@@ -102,12 +104,9 @@ function determineDisabled (textArray) {
   //console.log(dayOfWeek);
  }
 
-  //console.log(dayOfWeek);
-  //onsole.log(timeOfDay);
   matchArray.push(dayOfWeek);
   matchArray.push(timeOfDay);
   matchArray.push(textSplit[1]);
-  //console.log(matchArray);
   costCompute(matchArray);
   });
 
@@ -134,14 +133,6 @@ function determineDisabled (textArray) {
       }
     }
       for ( var z = 0; z < matchArray.length; z+=3 ) {
-          // console.log("dayofweek2 ===" , dayOfWeek2);
-          // console.log("matchArray[z] " , matchArray[z]);
-          // console.log("allTextSplit[1]   !==", allTextSplit[1]);
-          // console.log("matchArray[z+2]  ",matchArray[z+2]);
-          // console.log("time of day:   ===", timeOfDay);
-          // console.log("matchArray[z+1]  ",matchArray[z+1]);
-
-
         if  ((timeOfDay === matchArray[z+1]) && (dayOfWeek2 === matchArray[z])) {
           if ( allTextSplit[1]  !== matchArray[z+2]) {
           //console.log("thissy in the hizzy:   *******************   ",thissy);
