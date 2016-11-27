@@ -225,5 +225,18 @@ $('#payment').change(function(e) {
 
  }
 
+//checks email on each keyup to test if it is valid
+$('#mail').on("input",checkEmail);
+  function checkEmail () {
+  var email = this.value;
+  var emailPattern = new RegExp("[a-zA-Z0-9._]+@[a-zA-Z0-9]+[.][a-zA-Z]{2,}");
+  if ( emailPattern.test(email)){
+    $("#mail-error").remove();
+  } else {
+    $("#mail-error").remove();
+    $("label[for='mail']").append('<div id="mail-error">The email format is incorrect</div>');
+  }
+}
+
 theForm = document.getElementById('signupForm');
 theForm.addEventListener('submit', validateForm, false);
