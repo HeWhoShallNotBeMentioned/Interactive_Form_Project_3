@@ -218,6 +218,7 @@ $('#payment').change(function(e) {
    $("#zip-error").remove();
    $("#cc_num-error").remove();
    $("#cvv-error").remove();
+   $("#activities-error").remove();
 
   //checking if name field is blank
    if (nameField.length < 1) {
@@ -236,7 +237,14 @@ $('#payment').change(function(e) {
      }
 
    //at least one checkbox for sessions must be selected
-
+   if ($(".activities input:checkbox:checked").length > 0) {
+    console.log("At least one checkbox was checked.");
+    }
+    else {
+   // none is checked
+   $("#activities-error").remove();
+   $("#activities").append('<div id="activities-error" class="error">At least one checkbox must be selected.</div>');
+    }
 
    //If credit card - check credit length, zip code length, and cvv length
     if (creditCardPattern.test(userCreditCard)){
