@@ -199,19 +199,31 @@ $('#payment').change(function(e) {
    //prevents the default behavior or submitting the form
    e.preventDefault();
    var nameField = e.target.name.value;
+   var emailField = e.target.mail.value;
+   var emailPattern = new RegExp("[a-zA-Z0-9._]+@[a-zA-Z0-9]+[.][a-zA-Z]{2,}");
    var errorArray = [];
 
-   $("#name-error").hide();
+   $("#name-error").remove();
+   $("#mail-error").remove();
 
-   console.log(e.target.name.value);
+  //checking if name field is blank
    if (nameField.length < 1) {
-   console.log(e.target.name.value);
       errorArray.push(nameField);
-       $("label[for='name']").append('<div id="name-error">The name field is required</div>');
+      $("label[for='name']").append('<div id="name-error" class="error">The name field is required</div>');
     }
-   //checking if name field is blank
 
    //checking if email is formatted correctly
+
+     //console.log(e.target.mail.value);
+
+     if (emailPattern.test(emailField)){
+       console.log(emailField + " inside email if - approved");
+     } else {
+       console.log(emailField + " inside email if - not approved");
+       $("#mail-error").remove();
+       $("label[for='mail']").append('<div id="mail-error" class="error">The email format is incorrect</div>');
+       errorArray.push(emailField);
+     }
 
    //at least one checkbox for sessions must be selected
 
@@ -230,11 +242,12 @@ $('#mail').on("input",checkEmail);
   function checkEmail () {
   var email = this.value;
   var emailPattern = new RegExp("[a-zA-Z0-9._]+@[a-zA-Z0-9]+[.][a-zA-Z]{2,}");
+
   if ( emailPattern.test(email)){
     $("#mail-error").remove();
   } else {
     $("#mail-error").remove();
-    $("label[for='mail']").append('<div id="mail-error">The email format is incorrect</div>');
+    $("label[for='mail']").append('<div id="mail-error" class="error">The email format is incorrect</div>');
   }
 }
 
