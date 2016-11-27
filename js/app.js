@@ -201,39 +201,62 @@ $('#payment').change(function(e) {
    var nameField = e.target.name.value;
    var emailField = e.target.mail.value;
    var emailPattern = new RegExp("[a-zA-Z0-9._]+@[a-zA-Z0-9]+[.][a-zA-Z]{2,}");
-   var errorArray = [];
+   var userCreditCard = e.target.cc_num.value;
+   var creditCardPattern = new RegExp("[0-9]{13,16}");
+   var userZipCode = e.target.zip.value;
+   var zipCodePattern = new RegExp("[0-9]{5}$");
+   var userCVV = e.target.cvv.value;
+   var cvvPattern = new RegExp("[0-9]{3}$");
+
 
    $("#name-error").remove();
    $("#mail-error").remove();
+   $("#zip-error").remove();
+   $("#cc_num-error").remove();
+   $("#cvv-error").remove();
 
   //checking if name field is blank
    if (nameField.length < 1) {
-      errorArray.push(nameField);
-      $("label[for='name']").append('<div id="name-error" class="error">The name field is required</div>');
+
+      $("label[for='name']").append('<div id="name-error" class="error">The name field is required.</div>');
     }
 
    //checking if email is formatted correctly
-
-     //console.log(e.target.mail.value);
-
      if (emailPattern.test(emailField)){
-       console.log(emailField + " inside email if - approved");
+       //console.log(emailField + " inside email if - approved");
      } else {
-       console.log(emailField + " inside email if - not approved");
+       //console.log(emailField + " inside email if - not approved");
        $("#mail-error").remove();
-       $("label[for='mail']").append('<div id="mail-error" class="error">The email format is incorrect</div>');
-       errorArray.push(emailField);
+       $("label[for='mail']").append('<div id="mail-error" class="error">The email format is incorrect.</div>');
+
      }
 
    //at least one checkbox for sessions must be selected
 
+
    //If credit card - check credit length, zip code length, and cvv length
+    if (creditCardPattern.test(userCreditCard)){
+      console.log(userCreditCard);
+    } else {
+      $("#cc_num-error").remove();
+      $("label[for='cc_num']").append('<div id="cc_num-error" class="error">The credit card should be between 13 & 16 digits.</div>');
+    }
 
-   if (errorArray.length > 0) {
-      console.log("errorArray is greater than 0");
+    if (zipCodePattern.test(userZipCode)) {
+      console.log(userZipCode);
+    } else {
+      $("#zip-error").remove();
+      $("label[for='zip']").append('<div id="zip-error" class="error">The zip code should be 5 digits.</div>');
+    }
 
-      //give the 6 fields a new class for the red border?
-   }
+    if (cvvPattern.test(userCVV)) {
+      console.log(userCVV);
+    } else {
+      $("#cvv-error").remove();
+      $("label[for='cvv']").append('<div id="cvv-error" class="error">The cvv code should be 3 digits.</div>');
+    }
+
+
 
  }
 
