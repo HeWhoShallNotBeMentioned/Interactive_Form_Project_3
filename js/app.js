@@ -5,6 +5,9 @@ $('input[type="text"]')[0].focus();
 //hides the other title textbox on page load
 $('#other-title').hide();
 
+//hides the color tshirt selector until a t-shirt design is chosen
+$("#colors-js-puns").hide();
+
 //hides and shows the other title textbox depending upon the select box value
 $('#title').change(function(e) {
     //console.log("inside other text field function");
@@ -20,6 +23,7 @@ $('#title').change(function(e) {
 
 //tshirt color options function
  $('#design').change(function(e){
+   $("#colors-js-puns").show();
    //console.log("inside the tshirt color options function");
    if ($(this).val() == "js puns") {
       //onsole.log('inside js puns');
